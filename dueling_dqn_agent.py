@@ -89,11 +89,17 @@ class Agent():
         """
         states, actions, rewards, next_states, dones = experiences
 
-        # TODO: compute and minimize the loss
+        # compute and minimize the loss
         "*** YOUR CODE HERE ***"
 
+        # Use Double DQN
         # Get max predicted Q values (for next states) from target model
-        Q_targets_next = self.qnetwork_target(next_states).detach().max(1)[0].unsqueeze(1)
+        local_actions = self.qnetwork_local(
+            next_states).detach().argmax(dim=1).unsqueeze(1)
+        # Get max predicted Q values (for next states) from target model
+        Q_targets_next = self.qnetwork_target(
+            next_states).gather(1, local_actions).detach()
+
         # Compute Q targets for current states
         Q_targets = rewards + (gamma * Q_targets_next * (1 - dones))
 
