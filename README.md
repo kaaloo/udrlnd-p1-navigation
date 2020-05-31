@@ -31,6 +31,15 @@ conda create --name drlnd python=3.6
 source activate drlnd
 ```
 
+#### Install python dependencies
+
+To install required python dependencies use the following commands:
+
+```bash
+cd python
+pip install .
+```
+
 #### Download the ML Agents environment
 
 The `Navigation.ipynb` notebook in this project has been developed to run on linux.
