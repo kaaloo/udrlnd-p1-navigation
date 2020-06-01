@@ -6,7 +6,7 @@ import torch.nn.functional as F
 class QNetwork(nn.Module):
     """Actor (Policy) Model implementing a Dueling DQN architecture."""
 
-    def __init__(self, state_size, action_size, seed, fc1_units=768, fc2_units=768, head_units=384):
+    def __init__(self, state_size, action_size, seed, fc1_units=1024, fc2_units=1024, head_units=512):
         """Initialize parameters and build model.
         Params
         ======
