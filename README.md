@@ -22,6 +22,10 @@ The task is episodic, and in order to solve the environment, your agent must get
 
 ### Getting Started
 
+For convenience, this project can be run on FloydHub by clicking on this button: [![Run on FloydHub](https://static.floydhub.com/button/button-small.svg)](https://floydhub.com/run?template=https://github.com/kaaloo/udrlnd-p1-navigation)
+
+Otherwise, please follow the instructions below to setup the project on your computer.
+
 #### Setup and activate a python 3.6 environment
 
 This notebook requires a python 3.6 environment which you can create using conda.  Please see the [conda documentation](https://docs.conda.io/projects/conda/en/latest/user-guide/install/) if you don't have conda installed on your system.
