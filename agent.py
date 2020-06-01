@@ -2,7 +2,7 @@ import numpy as np
 import random
 from collections import namedtuple, deque
 
-from dueling_model import QNetwork
+from model import QNetwork
 
 import torch
 import torch.nn.functional as F
@@ -22,7 +22,11 @@ print("Torch device: {}".format(device))
 
 
 class Agent():
-    """Interacts with and learns from the environment."""
+    """
+    Deep Reinforcement Learning agent that interacts with and learns from the environment.
+    Uses the Double DQN algorithm (see https://arxiv.org/abs/1509.06461) with a Dueling DQN
+    model (see https://arxiv.org/abs/1511.06581).
+    """
 
     def __init__(self, state_size, action_size, seed):
         """Initialize an Agent object.
@@ -46,6 +50,7 @@ class Agent():
 
         # Replay memory
         self.memory = ReplayBuffer(action_size, BUFFER_SIZE, BATCH_SIZE, seed)
+
         # Initialize time step (for updating every UPDATE_EVERY steps)
         self.t_step = 0
 
@@ -91,14 +96,10 @@ class Agent():
         """
         states, actions, rewards, next_states, dones = experiences
 
-        # compute and minimize the loss
-        "*** YOUR CODE HERE ***"
-
-        # Use Double DQN
-        # Get max predicted Q values (for next states) from target model
+        # Use Double DQN: Get predicted actions from local network model
         local_actions = self.qnetwork_local(
             next_states).detach().argmax(dim=1).unsqueeze(1)
-        # Get max predicted Q values (for next states) from target model
+        # Get predicted Q values (for next states) from target model using predicted actions
         Q_targets_next = self.qnetwork_target(
             next_states).gather(1, local_actions).detach()
 
