@@ -48,7 +48,19 @@ In the `forward` method, the logits of the two heads are combined according to t
 
 ### Hyperparameters
 
-Hyperparameters for the neural network model where chosen using the DQN exercise as a guide.  Here the number of units in the linear layers (64) was the square of the environment complexity (8). Thus given that the Banana environment size was reported to be 37, the number of units in the linear layers could have been 1369, however before attempting to use this model size, attempts were made at 768 and 1024 with significantly similar results.
+Hyperparameters for the neural network model where chosen using the DQN exercise as a guide.  Here the number of units in the linear layers (64) was the square of the environment complexity (8). Thus given that the Banana environment size was reported to be 37, the number of units in the linear layers could have been 1369, however before attempting to use this model size, attempts were made at 768 and 1024 with significantly similar results.  In fact the best results in terms of compute time and number of episodes where actually obtained with 768 units and a peculiar condition where some additional log statements might have had an influence on random number generation by slowing down calculations.
+
+Hyperparameters for the agent were pretty much left as is with respect to the DQN exercise with however an explicit disabling of GPU which was useful when running the notebook locally since the available computer's GPU (a XPS 15 9530) was detected but not supported by Pytorch 0.4 causing a runtime error.
+
+```python
+BUFFER_SIZE = int(1e5)  # replay buffer size
+BATCH_SIZE = 64         # minibatch size
+GAMMA = 0.99            # discount factor
+TAU = 1e-3              # for soft update of target parameters
+LR = 5e-4               # learning rate
+UPDATE_EVERY = 4        # how often to update the network
+USE_GPU = False         # override GPU detection
+```
 
 ## Methods
 
