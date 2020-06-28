@@ -71,6 +71,8 @@ The [Prioritized Experience Replay](https://arxiv.org/abs/1511.05952) algorithm 
 
 ## Results
 
+### Best Run
+
 !["Best run"](./images/574-episodes-728-units-64-batch-size.png)
 
 The most succesful run solved the environment in 574 episodes using a model with 768 units and a batch size of 64, again with an implementation of Double DQN and Dueling DQN in the model.  This result was obtained at a moment in the elaboration of this project when an attempt to improve by adjusting the learning rate to the actual number of steps being taken by the agent per episode.  It turned out the the number of steps was actually constant (300 steps per episode).  It was unfortunately not possible to improve on this result whether by using the same exact parameters, different seeds, a larger model, or a different learning rate (higher or lower).  The only remarkable difference between this run and the others was the code involved in tracking and periodically reporting the number of steps per episode.  This is quite unfortunate, since it seems to imply that extraneous factors tied to the computing environment such as additional I/O or additional monitoring computation could be involved in the relative success of a run.
@@ -131,6 +133,16 @@ def dqn(n_episodes=2000, max_t=1000, eps_start=1.0, eps_end=0.01, eps_decay=0.99
 ```
 
 It was also found through running this notebook on FloydHub on CPU and GPU environments that a GPU, even a high-end GPU, did not contribute effectively towards shortening run times.
+
+### Current Results
+
+!["Current results"](./images/710-episodes-1024-units-64-batch-size.png)
+
+After many attempts to improve on the best run, a distinct pattern of oscillation when scores cross the 10.0 to 11.0 mark was clearly present.  Increasing the learning rate while keeping the parameters of the best run did not really help and various runs of this type where interrupted after 1000 episodes.
+
+The results presented here in the latest version of this repository are a fairly decent run finishing in 710 episodes using a different seed in an attempt to obtain an intuition about the impact of varying a more straightforward "external factor".  A slightly greater number of units were used in the model, 1024 instead of 768.  Otherwise the other hyperparameters (except for the change in the seed) remained constant.
+
+In a similar fashion, the above graph displays the same two part curve with an initial fairly constant rate of learning followed by a flatter oscillatory stage to reach the learning objectivs.
 
 ## Future Work
 
